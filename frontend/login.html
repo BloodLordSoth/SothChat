@@ -70,7 +70,7 @@
             password: password
         }
 
-        const res = await fetch('http://localhost:3000/login', {
+        const res = await fetch('/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dataObj)
@@ -81,7 +81,7 @@
         const data = await res.json()
         localStorage.setItem('username', data.username)
         localStorage.setItem('accessToken', data.accessToken)
-        window.location.href = 'http://localhost:3000/chat'
+        window.location.href = '/chat'
     }
 
     form.addEventListener('submit', (e) => {

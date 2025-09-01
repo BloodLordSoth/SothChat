@@ -6,7 +6,7 @@ let username = localStorage.getItem('username')
 const token = localStorage.getItem('accessToken')
 
 if (!token){
-    window.location.href = 'http://localhost:3000/login'
+    window.location.href = '/login'
 }
 
 socket.on('chat-message', data => {
@@ -29,13 +29,3 @@ function sendChat(message){
     element.textContent = `${message.username}: ${message.msg}`
     chatBox.appendChild(element)
 }
-
-async function loggedIn(){
-    const res = await fetch('http://localhost:3000/chat', {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}`}
-    })
-
-    if (!res.ok) return window.location.href = 'login.html'
-}
-loggedIn()
