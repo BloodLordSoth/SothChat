@@ -29,3 +29,20 @@ function sendChat(message){
     element.textContent = `${message.username}: ${message.msg}`
     chatBox.appendChild(element)
 }
+
+async function getAuth(){
+    const data = await fetch('/verify', {
+        method: "GET",
+        headers: { 'Authorization': `Bearer ${token}`}
+    })
+
+    if (!data.ok){
+        window.alert('Your session has expired, logging out')
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('username')
+        return window.location.href = '/login'
+    }
+}
+setInterval(() => {
+    getAuth()
+}, 10000)

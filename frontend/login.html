@@ -81,7 +81,19 @@
         const data = await res.json()
         localStorage.setItem('username', data.username)
         localStorage.setItem('accessToken', data.accessToken)
-        window.location.href = '/chat'
+
+        const token = localStorage.getItem('accessToken')
+
+        const direct = await fetch('/verify', {
+            method: "GET",
+            headers: {"Authorization": `Bearer ${token}`}
+        })
+
+        if (direct.ok){
+            window.location.href = '/chat'
+        } 
+
+        return window.alert('Invalid Token')
     }
 
     form.addEventListener('submit', (e) => {

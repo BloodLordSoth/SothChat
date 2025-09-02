@@ -42,6 +42,10 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dir, 'frontend', 'login.html'))
 })
 
+app.get('/verify', authenticate, (req, res) => {
+    res.sendStatus(205)
+})
+
 app.get('/chat', (req, res) => {
     res.sendFile(path.join(__dir, 'frontend', 'chat.html'))
 })
